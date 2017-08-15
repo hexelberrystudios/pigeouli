@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>pigeon</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/img/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/img/icons/favicon-16x16.png">
+    <!--[if IE]><link rel="shortcut icon" href="/static/img/icons/favicon.ico"><![endif]-->
+    <!-- Add to home screen for Android and modern mobile browsers -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#4DBA87">
+
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="pigeon">
+    <link rel="apple-touch-icon" href="/static/img/icons/apple-touch-icon-152x152.png">
+    <!-- Add to home screen for Windows -->
+    <meta name="msapplication-TileImage" content="/static/img/icons/msapplication-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#000000">
+    <style>
+      :root {
+        /* Colors */
+        --dark-color: #96373b;
+        --med-color: #f3595f;
+        --black-color: #555;
+        --gray-color: #d4c4d0;
+        --light-color: #ff9a9e;
+        --v-light-color: #fff;
+        --white-color: #fff;
+        --gray-color-shadow: rgba(191, 168, 185, 0.25);
+      }
+
+      body {
+        background-color: var(--light-color);
+        color: var(--white-color);
+        /* default to system font */
+        font-family: -apple-system, BlinkMacSystemFont, “Segoe UI”, Roboto, Helvetica, Arial, sans-serif;
+        font-size: 100%;
+      }
+
+      h1 {
+        font-size: 3em;
+        margin-top: 1em;
+        margin-bottom: 0.5em;
+        font-family: 'Times Roman', serif;
+      }
+
+      h2 {
+        font-size: 2em;
+        margin-top: 0;
+        font-family: 'Times Roman', serif;
+      }
+
+      .pg-white-text-shadow {
+        text-shadow: 0.05em 0.05em 0.05em var(--white-color);
+      }
+
+      .pg-dark-text-shadow {
+        text-shadow: 0.05em 0.05em 0.05em var(--dark-color);
+      }
+
+      .pg-button {
+        display: inline-block;
+        color: var(--white-color);
+        text-shadow: none;
+        font-size: 1.25rem;
+        background-color: var(--med-color);
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.25rem;
+        text-decoration: none;
+        border: 0.15rem solid var(--white-color);
+        box-shadow: 0.05rem 0.05rem 0.1rem var(--white-color);
+      }
+
+      .pg-txt-center {
+        text-align: center;
+      }
+    </style>
+    <% for (var chunk of webpack.chunks) {
+        for (var file of chunk.files) {
+          if (file.match(/\.(js|css)$/)) { %>
+    <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
+  </head>
+  <body>
+    <noscript>
+      This is your fallback content in case JavaScript fails to load.
+    </noscript>
+    <div id="app"></div>
+    <!-- Todo: only include in production -->
+    <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
