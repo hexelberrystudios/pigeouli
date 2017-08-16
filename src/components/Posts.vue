@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Post from '../Post';
+import Post from './Post';
 
 export default {
   name: 'posts',
@@ -17,6 +17,13 @@ export default {
 };
 </script>
 
-<style>
-  
+<style scoped>
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+  }
 </style>

@@ -4,6 +4,7 @@ import HomePage from '@/components/pages/HomePage';
 import KnockPage from '@/components/pages/KnockPage';
 import RegisterPage from '@/components/pages/RegisterPage';
 import LoginPage from '@/components/pages/LoginPage';
+import DashboardPage from '@/components/pages/DashboardPage';
 
 Vue.use(Router);
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/login',
       name: 'login-page',
       component: LoginPage
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard-page',
+      component: DashboardPage
     }
   ],
 });

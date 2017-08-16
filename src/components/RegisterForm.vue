@@ -31,7 +31,7 @@
         // @TODO: ajax call to register, where CouchDB url will be created,
         // and the url to sync with will be returned.
         // Prerequisite: Authorization token for signing up for premium.
-        self.$router.push('/app/home');
+        self.$router.push('/dashboard');
       }
     },
     components: {

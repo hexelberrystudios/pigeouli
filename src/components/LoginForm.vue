@@ -28,7 +28,7 @@
 
         // @TODO: ajax call to login, where the server will return the user's db url
         // for us to sync with
-        self.$router.push('/app/home');
+        self.$router.push('/dashboard');
       }
     },
     components: {
