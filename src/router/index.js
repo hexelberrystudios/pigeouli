@@ -5,6 +5,7 @@ import KnockPage from '@/components/pages/KnockPage';
 import RegisterPage from '@/components/pages/RegisterPage';
 import LoginPage from '@/components/pages/LoginPage';
 import DashboardPage from '@/components/pages/DashboardPage';
+import PostPage from '@/components/pages/PostPage';
 
 Vue.use(Router);
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/dashboard',
       name: 'dashboard-page',
       component: DashboardPage
+    },
+    {
+      path: '/post',
+      name: 'post-page',
+      component: PostPage
     }
   ],
 });

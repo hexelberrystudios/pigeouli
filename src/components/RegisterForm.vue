@@ -1,5 +1,5 @@
 <template>
-  <form v-on:submit="register" name="register" method="post" action="/app/register" class="hxb-form">
+  <form v-on:submit="register" name="register" method="post" action="/register">
     <text-field id="username"
                 label="username"
                 type="text"

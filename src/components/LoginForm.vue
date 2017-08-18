@@ -1,5 +1,5 @@
 <template>
-  <form v-on:submit="login" name="login" method="post" action="/app/login" class="hxb-form">
+  <form v-on:submit="login" name="login" method="post" action="/login">
     <text-field id="username"
                 label="username"
                 type="text"

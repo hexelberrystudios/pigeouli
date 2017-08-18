@@ -16,6 +16,8 @@
 <style>
   /* Footer */
   .pg-footer {
+    position: fixed;
+    bottom: 0;
     background-color: var(--dark-color);
     color: var(--white-color);
     width: 100%;

@@ -1,7 +1,7 @@
 <template>
   <article>
     <aside>
-      <img src="/static/img/profile.png" class="post__profile__pic" alt="" />
+      <img src="/static/img/profile.png" class="post__profile__pic" alt="An image of a pigeon" />
     </aside>
     <section class="post__container">
       <header class="post__username">{{ username }}</header>
