@@ -1,10 +1,8 @@
 <template>
-  <footer class="hxb-footer">
-    <ul class="hxb-footer-list">
-      <li class="hxb-footer-list__action"><router-link to="/app/todo">To Do</router-link></li>
-      <li class="hxb-footer-list__action"><router-link to="/app/search">Search</router-link></li>
-      <li class="hxb-footer-list__action"><router-link to="/app/edit">Edit</router-link></li>
-      <li class="hxb-footer-list__action"><router-link to="/app/new">New</router-link></li>
+  <footer class="pg-footer">
+    <ul class="pg-footer-list">
+      <li class="pg-footer-list__action"><router-link to="/dashboard">Home</router-link></li>
+      <li class="pg-footer-list__action"><router-link to="/post">Post</router-link></li>
     </ul>
   </footer>
 </template>
@@ -12,5 +10,33 @@
 <script>
   export default {
     name: 'app-footer'
-  }
+  };
 </script>
+
+<style>
+  /* Footer */
+  .pg-footer {
+    background-color: var(--dark-color);
+    color: var(--white-color);
+    width: 100%;
+    padding: 0.25rem 0;
+  }
+
+  .pg-footer-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pg-footer-list__action {
+    display: inline-block;
+    text-align: center;
+    padding: 0;
+  }
+
+  .pg-footer-list__action > a {
+    color: var(--white-color);
+  }
+</style>

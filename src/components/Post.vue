@@ -26,7 +26,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
   article {
     display: grid;
     grid-template-columns: 1fr 9fr;
