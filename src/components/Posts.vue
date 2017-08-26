@@ -11,7 +11,7 @@ import Post from './Post';
 
 export default {
   name: 'posts',
-  data: function data() {
+  data() {
     return {
       posts: [{
         username: 'Jumbalayah',

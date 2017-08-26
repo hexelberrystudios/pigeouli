@@ -22,7 +22,7 @@
       this.$store.dispatch('form/resetForm');
     },
     methods: {
-      login: function login(e) {
+      login(e) {
         const self = this;
         e.preventDefault();
 

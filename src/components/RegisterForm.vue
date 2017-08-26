@@ -23,7 +23,7 @@
       this.$store.dispatch('form/resetForm');
     },
     methods: {
-      register: function register(e) {
+      register(e) {
         const self = this;
         // let username = self.$store.state.form.fields.username;
         e.preventDefault();

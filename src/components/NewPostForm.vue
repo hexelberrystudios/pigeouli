@@ -6,6 +6,7 @@
     </div>
     <textarea rows="10" cols="50"></textarea>
     <submit-button text="Post"></submit-button>
+    <span>{{ charactersRemaining }}</span>
   </form>
 </template>
 
@@ -17,8 +18,11 @@ export default {
   created() {
     this.$store.dispatch('form/resetForm');
   },
+  computed: {
+
+  },
   methods: {
-    post: function post(e) {
+    post(e) {
       const self = this;
       // let username = self.$store.state.form.fields.username;
       e.preventDefault();
