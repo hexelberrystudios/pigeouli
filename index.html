@@ -90,6 +90,15 @@
       .pg-txt-center {
         text-align: center;
       }
+
+      .pg-sr-only {
+        position: absolute;
+        left: -10000rem;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
     </style>
     <% for (var chunk of webpack.chunks) {
         for (var file of chunk.files) {
