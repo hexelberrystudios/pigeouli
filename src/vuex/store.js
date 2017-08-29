@@ -4,10 +4,7 @@ import form from './modules/form';
 
 Vue.use(Vuex);
 
-const defaultState = {
-  topics: [],
-  count: 0
-};
+const defaultState = {};
 
 const inBrowser = typeof window !== 'undefined';
 
