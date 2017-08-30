@@ -25,6 +25,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  article {
+    padding-left: 1rem;
+  }
+
   a:first-child {
     margin-right: 0.5em;
   }

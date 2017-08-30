@@ -1,13 +1,15 @@
 <template>
   <form v-on:submit="register" name="register" method="post" action="/register">
-    <text-field id="username"
-                label="username"
-                type="text"
-                placeholder="username"></text-field>
+    <div id="username-container" class="pg-form-field">
+      <label id="username-label" class="pg-dark-text-shadow">username</label>
+      <span id="username" class="pg-dark-text-shadow">{{ username }}</span>
+    </div>
+    <text-field id="email"
+                label="email"
+                type="email"></text-field>
     <text-field id="passphrase"
                 label="passphrase"
-                type="password"
-                placeholder="passphrase"></text-field>
+                type="password"></text-field>
     <p class="pg-dark-text-shadow">(The passphrase is ideally a few random words, but can be anything as long as it's at least three characters.)</p>
     <submit-button text="I'm in"></submit-button>
   </form>
@@ -19,8 +21,20 @@
   
   export default {
     name: 'register-form',
-    created() {
-      this.$store.dispatch('form/resetForm');
+    computed: {
+      username: {
+        get() {
+          let result = '';
+
+          if (this.$store.state.form.fields && this.$store.state.form.fields.username) {
+            result = this.$store.state.form.fields.username;
+          } else {
+            this.$router.push('/name');
+          }
+
+          return result;
+        }
+      }
     },
     methods: {
       register(e) {
@@ -48,5 +62,20 @@
 
   form > * {
     justify-self: center;
+  }
+
+  #username-container {
+    text-align: center;
+  }
+
+  #username-label {
+    display: block;
+    font-size: 1.25em;
+  }
+
+  #username {
+    display: block;
+    font-size: 1.25em;
+    margin: 0.5em 0;
   }
 </style>

@@ -7,6 +7,7 @@ import LoginPage from '@/components/pages/LoginPage';
 import DashboardPage from '@/components/pages/DashboardPage';
 import PostPage from '@/components/pages/PostPage';
 import SettingsPage from '@/components/pages/SettingsPage';
+import NamePage from '@/components/pages/NamePage';
 
 Vue.use(Router);
 
@@ -46,6 +47,11 @@ export default new Router({
       path: '/settings',
       name: 'settings-page',
       component: SettingsPage
+    },
+    {
+      path: '/name',
+      name: 'name-page',
+      component: NamePage
     }
   ],
 });

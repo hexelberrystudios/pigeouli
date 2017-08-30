@@ -23,6 +23,10 @@
 </script>
 
 <style scoped>
+  article {
+    padding-left: 1rem;
+  }
+
   h2 {
     color: var(--dark-color);
   }
