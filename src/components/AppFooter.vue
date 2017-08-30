@@ -3,6 +3,7 @@
     <ul class="pg-footer-list">
       <li class="pg-footer-list__action"><router-link to="/dashboard">Home</router-link></li>
       <li class="pg-footer-list__action"><router-link to="/post">Post</router-link></li>
+      <li class="pg-footer-list__action"><router-link to="/settings">Settings</router-link></li>
     </ul>
   </footer>
 </template>
@@ -26,7 +27,7 @@
 
   .pg-footer-list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     list-style: none;
     margin: 0;
     padding: 0;
