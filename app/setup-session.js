@@ -1,8 +1,11 @@
 // Given an express instance, set up the foundation for managing sessions
 
 module.exports = function (app) {
+  var env;
+
+  // fill in process.env variables
   if (!process.env.SQL_HOST) {
-    var env = require('../config/env');
+    env = require('../config/env');
   }
 
   var sqlConfig = require('../config/sql-config');
@@ -13,14 +16,14 @@ module.exports = function (app) {
   var sessionStore = new KnexSessionStore({ tablename: 'sessions', knex: knex });
   // refer to https://github.com/expressjs/session for documentation
   var sessionConfig = {
-      resave: true,
-      saveUninitialized: false,
-      secret: 'gravelervoltorbmewtwocharmander',
-      store: sessionStore,
-      cookie: { 
-          secure: false,
-          expires: 3600000 * 24 * 12
-      }
+    resave: true,
+    saveUninitialized: false,
+    secret: 'gravelervoltorbmewtwocharmander',
+    store: sessionStore,
+    cookie: {
+      secure: false,
+      expires: 3600000 * 24 * 12
+    }
   };
 
   if (app.get('env') === 'production') {

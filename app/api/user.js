@@ -2,46 +2,35 @@
 
 var user = {};
 
-user.login = function login (req, res, next) {
-  var sqlConfig = require('../../config/sql-config');
-  var knex = require('knex')(sqlConfig);
-  
-  if (req.body.username && req.body.email) {
-    knex('users').select('id', 'username', 'status', 'restoreDate').where({
-      username: req.body.username,
-      email: req.body.email
-    }).then(function (rows) {
-        if (rows.length === 1) {
-          req.session.regenerate(function () {
-            req.session.user = rows[0];
-            res.redirect('/recent');
-          });
-        } else if (rows.length > 1) {
-          req.flash('error', ['There is an issue with your account. Please contact support at hexelberrystudios@gmail.com']);
-          res.redirect('/');
-        } else {
-          req.flash('error', ['User or email is incorrect.']);
-          res.redirect('/');
-        }
-    }).catch(function (error) {
-      console.log(error);
-      req.flash('error', [error.code]);
-      res.redirect('/');
-    });
-  } else {
-    req.flash('error', ['Parameters are missing. Please complete the form.']);
-    res.redirect('/');
-  }
-};
+user.register = function (username, email, passphrase, callback) {
+  var User = require('../models/user');
 
-user.logout = function logout (req, res, next) {
-  req.session.destroy(function(){
-    res.redirect('/');
+  // look for existing user with the given email
+  User.findByEmail(email).then(function (rows) {
+    // failed, account already exists
+    if (rows.length !== 0) {
+      callback(null, 'Email already exists.');
+    } else {
+      // failed, invalid data
+      if (!username || !email) {
+        callback(null, 'Parameters are missing. Please fill out the form.');
+      } else if (email.indexOf('@') === -1 || email.length >= 255) {
+        callback(null, 'Email is invalid.');
+      } else {
+        // pass, add user
+        User.add(username, email, passphrase).then(function (rows) {
+          // pass, user created
+          callback(rows[0]);
+        }).catch(function (err) {
+          // failed, db error
+          callback(null, err);
+        });
+      }
+    }
+  }).catch(function (error) {
+    // failed, db error
+    callback(null, error);
   });
-};
-
-user.register = function register (req, res, next) {
-  var passport = require()
 };
 
 module.exports = user;

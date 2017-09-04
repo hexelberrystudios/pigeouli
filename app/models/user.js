@@ -1,39 +1,10 @@
-var user = {};
+var User = {};
 
-user.register = function (username, email, passphrase, callback) {
-  // look for existing user with the given email
-  user.findByEmail(email).then(function (rows) {
-    // failed, account already exists
-    if (rows.length !== 0) {
-      callback(null, 'Email already exists.');
-    } else {
-      // failed, invalid data
-      if (!username || !email) {
-        callback(null, 'Parameters are missing. Please fill out the form.');
-      } else if (email.indexOf('@') === -1 || email.length >= 255) {
-        callback(null, 'Email is invalid.');
-      } else {
-        // pass, add user
-        user.add(username, email, passphrase).then(function (rows) {
-          // pass, user created
-          callback(rows[0]);
-        }).catch(function (err) {
-          // failed, db error
-          callback(null, err);
-        });
-      }
-    }
-  }).catch(function (error) {
-    // failed, db error
-    callback(null, error);
-  });
-};
-
-user.add = function (username, email, passphrase) {
+User.add = function (username, email, passphrase) {
   var knex = require('../utilities').getDB();
   var date = require('../../shared/date');
   var now = date.sqlNow();
-  
+
   return knex('users').insert({
     username: username,
     email: email,
@@ -43,19 +14,19 @@ user.add = function (username, email, passphrase) {
   });
 };
 
-user.generateHash = function (passphrase) {
+User.generateHash = function (passphrase) {
   var bcrypt = require('bcrypt-nodejs');
 
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+  return bcrypt.hashSync(passphrase, bcrypt.genSaltSync(8), null);
 };
 
-user.isPassphraseValid = function (password) {
+User.isPassphraseValid = function (userPassphrase, givenPassphrase) {
   var bcrypt = require('bcrypt-nodejs');
 
-  return bcrypt.compareSync(password, this.password);
+  return bcrypt.compareSync(userPassphrase, givenPassphrase);
 };
 
-user.findById = function (id) {
+User.findById = function (id) {
   var knex = require('../utilities').getDB();
 
   return knex('users').select('id', 'username').where({
@@ -63,7 +34,7 @@ user.findById = function (id) {
   });
 };
 
-user.findByEmail = function (email) {
+User.findByEmail = function (email) {
   var knex = require('../utilities').getDB();
 
   // returns a promise
@@ -72,4 +43,4 @@ user.findByEmail = function (email) {
   });
 };
 
-module.exports = user;
+module.exports = User;
