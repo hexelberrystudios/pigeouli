@@ -23,11 +23,11 @@ export default {
       this.$http.post('/login', {
         email: fields.email,
         passphrase: fields.passphrase
-      }).then(response => {
+      }).then((response) => {
         // success
         console.log(response);
         self.$router.push('/dashboard');
-      }, response => {
+      }, (response) => {
         // error
         console.error(response);
       });

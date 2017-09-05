@@ -4,7 +4,7 @@ var express = require('express');
 var serveStatic = require('serve-static');
 var app = express();
 var bodyParser = require('body-parser');
-var setupSession = require('setup-session');
+var setupSession = require('./app/setup-session');
 var router = require('./app/routes');
 
 app.use(bodyParser.json()); // for parsing application/json
