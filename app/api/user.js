@@ -23,13 +23,13 @@ user.register = function (username, email, passphrase, callback) {
           callback(rows[0]);
         }).catch(function (err) {
           // failed, db error
-          callback(null, err);
+          callback(null, null, err);
         });
       }
     }
   }).catch(function (error) {
     // failed, db error
-    callback(null, error);
+    callback(null, null, error);
   });
 };
 

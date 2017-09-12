@@ -22,11 +22,16 @@ passport.use('local-signup', new LocalStrategy({
   passReqToCallback: true
 }, function (req, email, passphrase, done) {
   process.nextTick(function () {
-    var User = require('./models/user');
-    var callback = function (user, err) {
-      if (err) {
-        return done(null, false, { errMsg: err });
+    var User = require('./api/user');
+    var callback = function (user, err, exception) {
+      if (exception) {
+        // DB error
+        return done(exception);
+      } else if (err) {
+        // user error
+        return done(null, false, { error: err });
       } else {
+        // success
         return done(null, user);
       }
     };
