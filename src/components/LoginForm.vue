@@ -1,7 +1,23 @@
 <template>
-  <form v-on:submit="login" name="login" method="post" action="/login">
-    <text-field id="username" label="username" type="text" placeholder="username"></text-field>
-    <text-field id="passphrase" label="passphrase" type="passphrase" placeholder="passphrase"></text-field>
+  <form v-on:submit="login"
+        name="login" 
+        method="post"
+        action="/login"
+        aria-describedby="form-error">
+    <text-field id="email"
+                label="email"
+                type="email"
+                placeholder="email"
+                :error="error.email"></text-field>
+    <text-field id="passphrase"
+                label="passphrase"
+                type="passphrase"
+                placeholder="passphrase"
+                :error="error.passphrase"></text-field>
+    <p id="form-error"
+       v-if="error.message"
+       class="pg-input-error pg-white-text-shadow"
+       role="alert">{{ error.message }}</p>
     <submit-button text="Login"></submit-button>
   </form>
 </template>
@@ -15,21 +31,37 @@ export default {
   created() {
     this.$store.dispatch('form/resetForm');
   },
+  data() {
+    return {
+      error: {}
+    };
+  },
   methods: {
     login(e) {
       const fields = this.$store.state.form.fields;
+      const generalError = 'The carrier pigeons that run our servers ran into an issue. Please try again later, or contact <a href="mailto:support@pigeouli.com">support@pigeouli.com</a>.';
+      // const self = this;
       e.preventDefault();
 
       this.$http.post('/login', {
         email: fields.email,
         passphrase: fields.passphrase
       }).then((response) => {
-        // success
-        console.log(response);
-        self.$router.push('/dashboard');
+        if (response.body.error) {
+          // form is invalid, show errors
+          this.error = response.body.error;
+        } else {
+          // success
+          console.log(response);
+          // self.$router.push('/dashboard');
+        }
       }, (response) => {
         // error
+        this.error = {
+          message: generalError
+        };
         console.error(response);
+        window.scrollTo(0, 0);
       });
     }
   },
@@ -45,7 +77,7 @@ form {
   display: grid;
 }
 
-form>* {
+form > * {
   justify-self: center;
 }
 </style>

@@ -24,18 +24,15 @@ passport.use('local-signup', new LocalStrategy({
   process.nextTick(function () {
     var User = require('./api/user');
     var callback = function (user, err, exception) {
-      console.log('callback');
+
       if (exception) {
         // DB error
         return done(exception);
       } else if (err) {
         // user error
-        console.log('error');
-        console.log(err);
         return done(null, false, { error: err });
       } else {
         // success
-        console.log('good');
         return done(null, user);
       }
     };
@@ -52,7 +49,7 @@ passport.use('local-login', new LocalStrategy({
   passReqToCallback: true
 }, function (req, email, passphrase, done) {
   var User = require('./models/user');
-  console.log('local-login');
+
   User.findByEmail(email).then(function (rows) {
     if (rows.length !== 1) {
       return done(null, false, { message: 'User not found.' });
