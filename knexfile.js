@@ -5,7 +5,16 @@ module.exports = {
   development: {
     client: 'mysql',
     connection: {
-      filename: './app/env'
+      database: 'pigeouli',
+      user:     'root',
+      password: 'gamera'
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      tableName: 'knex_migrations'
     }
   },
 

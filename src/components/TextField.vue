@@ -7,7 +7,13 @@
            class="pg-input-field"
            :placeholder="placeholder"
            :value="value"
+           :aria-invalid="isInvalid"
+           :aria-describedby="errorId"
            @input="update" />
+    <span  :id="errorId"
+           class="pg-input-error pg-white-text-shadow"
+           role="alert"
+           v-if="error">{{ error }}</span>
   </div>
 </template>
 
@@ -33,6 +39,18 @@
         });
       }
     },
+    data() {
+      const errorId = `${this.id}_error`;
+
+      return {
+        errorId
+      };
+    },
+    computed: {
+      isInvalid() {
+        return !!this.error;
+      }
+    },
     // define the props that can be passed in, to differentiate local variables
     // versus arguments I guess
     props: {
@@ -54,6 +72,10 @@
         required: false
       },
       value: {
+        type: String,
+        required: false
+      },
+      error: {
         type: String,
         required: false
       }

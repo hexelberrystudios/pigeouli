@@ -19,7 +19,9 @@ module.exports = function (router, isLoggedIn, utilities) {
       utilities.errorHandler(exception); 
       return next(exception); // error 500
     } else if (feedback) {
-      return res.status(200).json({ error: feedback.error });
+      console.log('feedback error');
+      console.log(feedback);
+      return res.status(200).json({ error: feedback });
     } else if (!user) {
       utilities.errorHandler('409');
       return res.status(409).end();
@@ -45,6 +47,8 @@ module.exports = function (router, isLoggedIn, utilities) {
   router.route('/register')
     .post(function (req, res, next) {
       passport.authenticate('local-signup', function (err, user, info) {
+        console.log('local-signup');
+        console.log(info);
         return login(res, next, err, info, user);
       })(req, res, next);
     });

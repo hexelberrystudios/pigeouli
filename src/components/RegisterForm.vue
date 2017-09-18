@@ -1,12 +1,26 @@
 <template>
-  <form v-on:submit="register" name="register" method="post" action="/register">
+  <form v-on:submit="register"
+        name="register" 
+        method="post" 
+        action="/register" 
+        aria-describedby="form-error">
     <div id="username-container" class="pg-form-field">
       <label id="username-label" class="pg-dark-text-shadow">username</label>
       <span id="username" class="pg-dark-text-shadow">{{ username }}</span>
     </div>
-    <text-field id="email" label="email" type="email"></text-field>
-    <text-field id="passphrase" label="passphrase" type="password"></text-field>
+    <text-field id="email" 
+                label="email" 
+                type="email" 
+                :error="error.email"></text-field>
+    <text-field id="passphrase"
+                label="passphrase" 
+                type="password" 
+                :error="error.passphrase"></text-field>
     <p class="pg-dark-text-shadow">(The passphrase is ideally a few random words, but can be anything as long as it's at least three characters.)</p>
+    <p id="form-error"
+       v-if="error.message"
+       class="pg-input-error pg-white-text-shadow"
+       role="alert">{{ error.message }}</p>
     <submit-button text="I'm in"></submit-button>
   </form>
 </template>
@@ -17,6 +31,11 @@ import SubmitButton from './SubmitButton';
 
 export default {
   name: 'register-form',
+  data() {
+    return {
+      error: {}
+    };
+  },
   computed: {
     username: {
       get() {
@@ -35,6 +54,8 @@ export default {
   methods: {
     register(e) {
       const fields = this.$store.state.form.fields;
+      const generalError = 'The carrier pigeons that run our servers ran into an issue. Please try again later, or contact <a href="mailto:support@pigeouli.com">support@pigeouli.com</a>.';
+      // const self = this;
       // let username = self.$store.state.form.fields.username;
       e.preventDefault();
 
@@ -43,12 +64,21 @@ export default {
         email: fields.email,
         passphrase: fields.passphrase
       }).then((response) => {
-        // success
-        console.log(response);
-        self.$router.push('/dashboard');
+        if (response.body.error) {
+          // form is invalid, show errors
+          this.error = response.body.error;
+        } else {
+          // success
+          console.log(response.body);
+          // self.$router.push('/dashboard');
+        }
       }, (response) => {
         // error
+        this.error = {
+          message: generalError
+        };
         console.error(response);
+        window.scrollTo(0, 0);
       });
     }
   },
@@ -64,7 +94,7 @@ form {
   display: grid;
 }
 
-form>* {
+form > * {
   justify-self: center;
 }
 

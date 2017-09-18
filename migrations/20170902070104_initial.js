@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
       table.string('username', 254).notNullable();
       table.string('email', 254).notNullable();
       table.string('passphrase', 254).notNullable();
-      table.boolean('isAdmin').notNullable().defaultTo(false);
+      table.boolean('is_admin').notNullable().defaultTo(false);
       table.string('salt', 254).notNullable();
       table.string('token', 254).nullable();
       table.dateTime('token_expire_date').nullable();

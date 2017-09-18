@@ -98,6 +98,14 @@
         height: 1px;
         overflow: hidden;
       }
+
+      .pg-input-error {
+        display: block;
+        color: var(--dark-color);
+        font-weight: bold;
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
     </style>
     <% for (var chunk of webpack.chunks) {
         for (var file of chunk.files) {

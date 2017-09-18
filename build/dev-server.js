@@ -71,6 +71,19 @@ var readyPromise = new Promise(resolve => {
   _resolve = resolve
 })
 
+// CUSTOM: taken from server.js
+var bodyParser = require('body-parser');
+var setupSession = require('../app/setup-session');
+var router = require('../app/routes');
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+setupSession(app);
+// end CUSTOM code
+
+// routes
+app.use('/', router);
+
 console.log('> Starting dev server...')
 devMiddleware.waitUntilValid(() => {
   console.log('> Listening at ' + uri + '\n')

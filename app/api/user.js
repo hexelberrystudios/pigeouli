@@ -9,13 +9,13 @@ user.register = function (username, email, passphrase, callback) {
   User.findByEmail(email).then(function (rows) {
     // failed, account already exists
     if (rows.length !== 0) {
-      callback(null, 'Email already exists.');
+      callback(null, { email: 'Email already exists.' });
     } else {
       // failed, invalid data
       if (!username || !email) {
-        callback(null, 'Parameters are missing. Please fill out the form.');
+        callback(null, { message: 'Parameters are missing. Please fill out the form.' });
       } else if (email.indexOf('@') === -1 || email.length >= 255) {
-        callback(null, 'Email is invalid.');
+        callback(null, { email: 'Email is invalid.' });
       } else {
         // pass, add user
         User.add(username, email, passphrase).then(function (rows) {
