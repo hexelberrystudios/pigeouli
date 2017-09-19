@@ -19,8 +19,9 @@
     <p class="pg-dark-text-shadow">(The passphrase is ideally a few random words, but can be anything as long as it's at least three characters.)</p>
     <p id="form-error"
        v-if="error.message"
+       v-html="error.message"
        class="pg-input-error pg-white-text-shadow"
-       role="alert">{{ error.message }}</p>
+       role="alert"></p>
     <submit-button text="I'm in"></submit-button>
   </form>
 </template>

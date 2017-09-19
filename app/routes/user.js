@@ -57,7 +57,7 @@ module.exports = function (router, isLoggedIn, utilities) {
     req.session.destroy();
     return res.redirect('/');
   });
-  router.get('/new-username', function (req, res) {
+  router.get('/new-username', function (req, res, next) {
     var user = require('../api/user');
 
     user.generateUsername().then(function (user) {

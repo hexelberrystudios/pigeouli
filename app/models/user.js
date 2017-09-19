@@ -8,7 +8,7 @@ User.add = function (username, email, passphrase) {
   return knex('users').insert({
     username: username,
     email: email,
-    passphrase: user.generateHash(passphrase),
+    passphrase: User.generateHash(passphrase),
     created_at: now,
     updated_at: now
   });

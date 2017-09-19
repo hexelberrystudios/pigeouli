@@ -1,4 +1,5 @@
 var usernameGen = {};
+var utilities = require('./utilities');
 
 usernameGen.adjectives = [
   'aback', 
@@ -2382,6 +2383,11 @@ usernameGen.nouns = [
   'jay',
   'robin'
 ];
+
+// randomize the order of the arrays, so it remains easy to edit,
+// but randomization doesn't end up favoring a particular starting letter
+usernameGen.adjectives = utilities.shuffleArray(usernameGen.adjectives);
+usernameGen.nouns = utilities.shuffleArray(usernameGen.nouns);
 
 usernameGen.generate = function () {
   var utilities = require('./utilities');

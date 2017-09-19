@@ -1,10 +1,14 @@
 <template>
   <article>
     <img src="/static/img/pigeon-select.png" />
-    <span id="name-prompt" class="pg-dark-text-shadow">Your name is</span>
-    <span id="username">{{ username }}</span>
+    <span id="name-prompt" class="pg-dark-text-shadow">Your username is</span>
+    <span id="username" class="pg-white-text-shadow">{{ username }}</span>
     <button type="button" @click="reroll" class="pg-button">No, it's...</button>
     <router-link to="/register" class="pg-dark-text-shadow">Yeah, that's it.</router-link>
+    <p v-if="error"
+       v-html="error"
+       class="pg-input-error pg-white-text-shadow"
+       role="alert"></p>
   </article>
 </template>
 
@@ -13,6 +17,11 @@ import Utilities from '../../utilities';
 
 export default {
   name: 'name-page',
+  data() {
+    return {
+      error: ''
+    };
+  },
   created() {
     this.$store.dispatch('form/resetForm');
     this.reroll();
@@ -33,12 +42,11 @@ export default {
   methods: {
     reroll() {
       this.$http.get('/new-username').then((response) => {
-        console.log(response.body);
+        this.username = response.body;
       }, (response) => {
         this.error = Utilities.generalError;
         console.error(response);
       });
-      this.username = 'doof badonk';
     }
   }
 };
@@ -78,7 +86,7 @@ export default {
   a {
     display: block;
     text-align: center;
-    padding-top: 1rem;
+    padding: 1rem;
     color: var(--white-color);
   }
 </style>

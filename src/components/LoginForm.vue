@@ -16,8 +16,9 @@
                 :error="error.passphrase"></text-field>
     <p id="form-error"
        v-if="error.message"
+       v-html="error.message"
        class="pg-input-error pg-white-text-shadow"
-       role="alert">{{ error.message }}</p>
+       role="alert"></p>
     <submit-button text="Login"></submit-button>
   </form>
 </template>
