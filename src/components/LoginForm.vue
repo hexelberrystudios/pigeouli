@@ -25,6 +25,7 @@
 <script>
 import TextField from './TextField';
 import SubmitButton from './SubmitButton';
+import Utilities from '../utilities';
 
 export default {
   name: 'login-form',
@@ -39,7 +40,6 @@ export default {
   methods: {
     login(e) {
       const fields = this.$store.state.form.fields;
-      const generalError = 'The carrier pigeons that run our servers ran into an issue. Please try again later, or contact <a href="mailto:support@pigeouli.com">support@pigeouli.com</a>.';
       // const self = this;
       e.preventDefault();
 
@@ -58,7 +58,7 @@ export default {
       }, (response) => {
         // error
         this.error = {
-          message: generalError
+          message: Utilities.generalError
         };
         console.error(response);
         window.scrollTo(0, 0);

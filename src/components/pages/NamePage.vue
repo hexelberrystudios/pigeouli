@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import Utilities from '../../utilities';
+
 export default {
   name: 'name-page',
   created() {
@@ -30,6 +32,12 @@ export default {
   },
   methods: {
     reroll() {
+      this.$http.get('/new-username').then((response) => {
+        console.log(response.body);
+      }, (response) => {
+        this.error = Utilities.generalError;
+        console.error(response);
+      });
       this.username = 'doof badonk';
     }
   }

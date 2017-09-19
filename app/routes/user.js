@@ -57,4 +57,13 @@ module.exports = function (router, isLoggedIn, utilities) {
     req.session.destroy();
     return res.redirect('/');
   });
+  router.get('/new-username', function (req, res) {
+    var user = require('../api/user');
+
+    user.generateUsername().then(function (user) {
+      return res.status(200).json(user);
+    }).catch(function (err) {
+      return next(err);
+    });
+  });
 };

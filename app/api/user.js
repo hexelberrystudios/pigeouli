@@ -34,25 +34,29 @@ user.register = function (username, email, passphrase, callback) {
 };
 
 user.generateUsername = function () {
+  var Promise = require('bluebird');
   var User = rqeuire('../models/user');
   var usernameGenerator = require('../username-generator');
   
-  // @TODO: use proper bluebird promises
-  // keep trying to generate unique usernames until one that hasn't
-  // been used has been found
-  var getUniqueUsername = function () {
-    var username = usernameGenerator.generate();
+  return new Promise(function (resolve, reject) {
+    // keep trying to generate unique usernames until one that hasn't
+    // been used has been found
+    var getUniqueUsername = function () {
+      var username = usernameGenerator.generate();
 
-    User.findByUsername(username).then(function (rows) {
-      if (rows.length) {
-        getUniqueUsername();
-      } else {
-        callback(rows[0]);
-      }
-    });
-  };
+      User.findByUsername(username).then(function (rows) {
+        if (rows.length) {
+          getUniqueUsername();
+        } else {
+          resolve(rows[0]);
+        }
+      }).catch(function (err) {
+        reject(err);
+      });
+    };
 
-  getUniqueUsername();
+    getUniqueUsername();
+  });
 };
 
 module.exports = user;
