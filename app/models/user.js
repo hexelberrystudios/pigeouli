@@ -26,21 +26,22 @@ User.isPassphraseValid = function (userPassphrase, givenPassphrase) {
   return bcrypt.compareSync(userPassphrase, givenPassphrase);
 };
 
-User.findById = function (id) {
+User.find = function (options) {
   var knex = require('../utilities').getDB();
+  
+  return knex('users').select('id', 'username', 'email').where(options);
+};
 
-  return knex('users').select('id', 'username').where({
-    id: id
-  });
+User.findById = function (id) {
+  return User.find({ id: id });
 };
 
 User.findByEmail = function (email) {
-  var knex = require('../utilities').getDB();
+  return User.find({ email: email });
+};
 
-  // returns a promise
-  return knex('users').select('id', 'username').where({
-    email: email
-  });
+User.findByUsername = function (username) {
+  return User.find({ username: username });
 };
 
 module.exports = User;
