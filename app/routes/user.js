@@ -14,14 +14,14 @@ module.exports = function (router, isLoggedIn, utilities) {
    * @param {String} feedbackErr Feedback for the user. ex: Email is invalid.
    * @param {*} user             User info.
    */
-  var login = function (res, next, exception, feedback, user) {
+  var login = function (req, res, next, exception, feedback, user) {
     if (exception) {
       utilities.errorHandler(exception); 
       return next(exception); // error 500
     } else if (feedback) {
       console.log('feedback error');
       console.log(feedback);
-      return res.status(200).json({ error: feedback });
+      return res.status(200).json(feedback);
     } else if (!user) {
       utilities.errorHandler('409');
       return res.status(409).end();
@@ -41,15 +41,13 @@ module.exports = function (router, isLoggedIn, utilities) {
   router.route('/login')
     .post(function (req, res, next) {
       passport.authenticate('local-login', function (err, user, info) {
-        return login(res, next, err, info, user);
+        return login(req, res, next, err, info, user);
       })(req, res, next);
     });
   router.route('/register')
     .post(function (req, res, next) {
       passport.authenticate('local-signup', function (err, user, info) {
-        console.log('local-signup');
-        console.log(info);
-        return login(res, next, err, info, user);
+        return login(req, res, next, err, info, user);
       })(req, res, next);
     });
   router.get('/logout', function (req, res) {

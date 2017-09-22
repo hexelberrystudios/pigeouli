@@ -65,9 +65,12 @@ export default {
         email: fields.email,
         passphrase: fields.passphrase
       }).then((response) => {
+        console.log(response.body);
+        console.log(response.body.error);
         if (response.body.error) {
           // form is invalid, show errors
           this.error = response.body.error;
+          window.scrollTo(0, 0);
         } else {
           // success
           console.log(response.body);
