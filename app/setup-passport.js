@@ -2,17 +2,21 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 passport.serializeUser(function (user, done) {
+  console.log('serializing');
+  console.log(user);
   done(null, user.id);
 });
 
 passport.deserializeUser(function (id, done) {
   var User = require('./models/user');
 
+  console.log(id);
   User.findById(id).then(function (rows) {
+    console.log(rows);
     return done(null, rows[0]);
   }).catch(function (error) {
     return require('./utilities').errorHandler(error);
-  });;
+  });
 });
 
 // setup register path/functionality
@@ -23,21 +27,19 @@ passport.use('local-signup', new LocalStrategy({
 }, function (req, email, passphrase, done) {
   process.nextTick(function () {
     var User = require('./api/user');
-    var callback = function (user, err, exception) {
-
-      if (exception) {
+    
+    User.register(req.body.username, email, passphrase).then(function (result) {
+      if (result.exception) {
         // DB error
-        return done(exception);
-      } else if (err) {
+        return done(result.exception);
+      } else if (result.error) {
         // user error
-        return done(null, false, { error: err });
+        return done(null, false, result);
       } else {
         // success
-        return done(null, user);
+        return done(null, result);
       }
-    };
-
-    User.register(req.body.username, email, passphrase, callback);
+    });
   });
 }
 ));

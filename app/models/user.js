@@ -23,13 +23,16 @@ User.generateHash = function (passphrase) {
 User.isPassphraseValid = function (userPassphrase, givenPassphrase) {
   var bcrypt = require('bcrypt-nodejs');
 
-  return bcrypt.compareSync(userPassphrase, givenPassphrase);
+  console.log('isPassphraseValid');
+  console.log(userPassphrase);
+  console.log(givenPassphrase);
+  return bcrypt.compareSync(givenPassphrase, userPassphrase);
 };
 
 User.find = function (options) {
   var knex = require('../utilities').getDB();
   
-  return knex('users').select('id', 'username', 'email').where(options);
+  return knex('users').select('id', 'username', 'email', 'passphrase').where(options);
 };
 
 User.findById = function (id) {

@@ -56,7 +56,7 @@ export default {
   methods: {
     register(e) {
       const fields = this.$store.state.form.fields;
-      // const self = this;
+      const self = this;
       // let username = self.$store.state.form.fields.username;
       e.preventDefault();
 
@@ -74,7 +74,7 @@ export default {
         } else {
           // success
           console.log(response.body);
-          // self.$router.push('/dashboard');
+          self.$router.push('/dashboard');
         }
       }, (response) => {
         // error

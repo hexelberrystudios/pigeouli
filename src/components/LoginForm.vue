@@ -11,7 +11,7 @@
                 :error="error.email"></text-field>
     <text-field id="passphrase"
                 label="passphrase"
-                type="passphrase"
+                type="password"
                 placeholder="passphrase"
                 :error="error.passphrase"></text-field>
     <p id="form-error"
@@ -40,8 +40,9 @@ export default {
   },
   methods: {
     login(e) {
+      let user;
       const fields = this.$store.state.form.fields;
-      // const self = this;
+      const self = this;
       e.preventDefault();
 
       this.$http.post('/login', {
@@ -54,7 +55,11 @@ export default {
         } else {
           // success
           console.log(response);
-          // self.$router.push('/dashboard');
+          user = response.data.user;
+
+          if (user) {
+            self.$router.push('/dashboard');
+          }
         }
       }, (response) => {
         // error
