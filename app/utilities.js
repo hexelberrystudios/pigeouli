@@ -37,4 +37,17 @@ utilities.shuffleArray = function (array) {
   return array;
 };
 
+utilities.generateToken = function () {
+  var id,
+    i;
+  var buf = new Buffer(16);
+
+  for (i = 0; i < buf.length; i++) {
+      buf[i] = Math.floor(Math.random() * 256);
+  }
+  id = buf.toString('base64');
+
+  return id;
+};
+
 module.exports = utilities;

@@ -19,8 +19,6 @@ module.exports = function (router, isLoggedIn, utilities) {
       utilities.errorHandler(exception); 
       return next(exception); // error 500
     } else if (feedback) {
-      console.log('feedback error');
-      console.log(feedback);
       return res.status(200).json(feedback);
     } else if (!user) {
       utilities.errorHandler('409');
@@ -44,22 +42,56 @@ module.exports = function (router, isLoggedIn, utilities) {
         return login(req, res, next, err, info, user);
       })(req, res, next);
     });
+
   router.route('/register')
     .post(function (req, res, next) {
       passport.authenticate('local-signup', function (err, user, info) {
         return login(req, res, next, err, info, user);
       })(req, res, next);
     });
+
   router.get('/logout', function (req, res) {
     req.logout();
     req.session.destroy();
     return res.redirect('/');
   });
+
   router.get('/new-username', function (req, res, next) {
     var user = require('../api/user');
 
     user.generateUsername().then(function (user) {
       return res.status(200).json(user);
+    }).catch(function (err) {
+      return next(err);
+    });
+  });
+
+  router.post('/forgot', function (req, res, next) {
+    var User = require('../models/user');
+    console.log(req.body.email);
+
+    User.startPassphraseReset(req.body.email).then(function () {
+      return res.status(200);
+    }).catch(function (err) {
+      return next(err);
+    });
+  });
+
+  router.get('/reset/:token', function (req, res, next) {
+    var user = require('../api/user');
+
+    user.continuePassphraseReset(req.params.token).then(function () {
+      return res.status(200);
+    }).catch(function (err) {
+      return next(err);
+    });
+  });
+
+  router.post('/reset', function (req, res, next) {
+    var user = require('../api/user');
+    
+    user.completePassphraseReset(req.body.token, req.body.passphrase).then(function () {
+      return res.status(200);
     }).catch(function (err) {
       return next(err);
     });

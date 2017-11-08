@@ -8,6 +8,8 @@ import DashboardPage from '@/components/pages/DashboardPage';
 import PostPage from '@/components/pages/PostPage';
 import SettingsPage from '@/components/pages/SettingsPage';
 import NamePage from '@/components/pages/NamePage';
+import ForgotPassphrasePage from '@/components/pages/ForgotPassphrasePage';
+import ResetPassphrasePage from '@/components/pages/ResetPassphrasePage';
 
 Vue.use(Router);
 
@@ -52,6 +54,16 @@ export default new Router({
       path: '/name',
       name: 'name-page',
       component: NamePage
+    },
+    {
+      path: '/forgot',
+      name: 'forgot-passphrase-page',
+      component: ForgotPassphrasePage
+    },
+    {
+      path: '/reset/:token',
+      name: 'reset-passphrase-page',
+      component: ResetPassphrasePage
     }
   ],
 });

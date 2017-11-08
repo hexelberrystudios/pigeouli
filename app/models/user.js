@@ -2,7 +2,7 @@ var User = {};
 
 User.add = function (username, email, passphrase) {
   var knex = require('../utilities').getDB();
-  var date = require('../../shared/date');
+  var Date = require('../../shared/date');
   var now = date.sqlNow();
 
   return knex('users').insert({
@@ -45,6 +45,40 @@ User.findByEmail = function (email) {
 
 User.findByUsername = function (username) {
   return User.find({ username: username });
+};
+
+User.startPassphraseReset = function (email) {
+  var tokenExpireDate;
+  var Date = require('../../shared/date');
+  var utilities = require('../utilities');
+  var currentDate = new Date();
+  var dateDiff = currentDate.getTime() + (14 * 24 * 60 * 60 * 1000); // two weeks from now
+  tokenExpireDate.setTime(dateDiff);
+  var formattedDate = date.sqlDate(tokenExpireDate);
+
+  return knex('users')
+    .where({ email: email })
+    .update({
+      token: utilities.generateToken(),
+      token_expire_date: formattedDate
+    });
+};
+
+User.continuePassphraseReset = function (token) {
+  return knex('users')
+    .where({ token: token });
+};
+
+User.completePassphraseReset = function (token, passphrase) {
+  var knex = require('../utilities').getDB();
+
+  return knex('users')
+    .where({ token: token })
+    .update({
+      passphrase: User.generateHash(passphrase),
+      token: null,
+      token_expire_date: null
+    });
 };
 
 module.exports = User;
