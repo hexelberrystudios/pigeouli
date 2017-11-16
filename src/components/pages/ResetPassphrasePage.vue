@@ -5,10 +5,11 @@
     </header>
     <form v-on:submit="reset"
         name="reset" 
+        class="pg-form"
         method="post"
         action="/reset"
         aria-describedby="form-error">
-      <p>Fill out this form to complete a password reset.</p>
+      <p class="pg-dark-text-shadow">Fill out this form to complete a password reset.</p>
       <text-field id="email"
                   label="email"
                   type="email"
@@ -20,8 +21,8 @@
 </template>
 
 <script>
-  import TextField from './TextField';
-  import SubmitButton from './SubmitButton';
+  import TextField from '../TextField';
+  import SubmitButton from '../SubmitButton';
   import Utilities from '../../utilities';
 
   export default {
@@ -31,17 +32,11 @@
     },
     data() {
       return {
-        error: {},
-        formSubmitted: false
+        error: {}
       };
     },
-    computed: {
-      mailtoInfo() {
-        return 'mailto:support@pigeouli.com?Subject=Reset%20Password%20Request%20for%20' + encodeURIComponent(this.$store.state.form.fields.email);
-      }
-    },
     methods: {
-      forget(e) {
+      reset(e) {
         const fields = this.$store.state.form.fields;
         const self = this;
         e.preventDefault();
@@ -52,15 +47,15 @@
         }).then((response) => {
           if (response.body.error) {
             // form is invalid, show errors
-            this.error = response.body.error;
+            self.error = response.body.error;
           } else {
             // success
             console.log(response);
-            this.formSubmitted = true;
+            self.formSubmitted = true;
           }
         }, (response) => {
           // error
-          this.error = {
+          self.error = {
             message: Utilities.generalError
           };
           console.error(response);

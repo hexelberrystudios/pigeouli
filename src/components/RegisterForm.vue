@@ -1,6 +1,7 @@
 <template>
   <form v-on:submit="register"
-        name="register" 
+        name="register"
+        class="pg-form"
         method="post" 
         action="/register" 
         aria-describedby="form-error">
@@ -94,14 +95,6 @@ export default {
 </script>
 
 <style scoped>
-form {
-  display: grid;
-}
-
-form > * {
-  justify-self: center;
-}
-
 #username-container {
   text-align: center;
 }

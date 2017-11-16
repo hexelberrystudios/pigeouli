@@ -4,11 +4,12 @@
       <h1 class="pg-dark-text-shadow pg-txt-center">Pigeouli</h1>
     </header>
     <form v-on:submit="forget"
-        name="forgot" 
+        name="forgot"
+        class="pg-form"
         method="post"
         action="/forgot"
         aria-describedby="form-error">
-      <p>Fill out this form to begin a password reset.</p>
+      <p class="pg-dark-text-shadow">Fill out this form to begin a password reset.</p>
       <text-field id="email"
                   label="email"
                   type="email"
@@ -21,8 +22,8 @@
 </template>
 
 <script>
-  import TextField from './TextField';
-  import SubmitButton from './SubmitButton';
+  import TextField from '../TextField';
+  import SubmitButton from '../SubmitButton';
   import Utilities from '../../utilities';
 
   export default {
@@ -38,7 +39,7 @@
     },
     computed: {
       mailtoInfo() {
-        return 'mailto:support@pigeouli.com?Subject=Reset%20Password%20Request%20for%20' + encodeURIComponent(this.$store.state.form.fields.email);
+        return `mailto:support@pigeouli.com?Subject=Reset%20Password%20Request%20for%20${encodeURIComponent(this.$store.state.form.fields.email)}`;
       }
     },
     methods: {
@@ -47,20 +48,20 @@
         const self = this;
         e.preventDefault();
 
-        this.$http.post('/forget', {
+        this.$http.post('/forgot', {
           email: fields.email
         }).then((response) => {
           if (response.body.error) {
             // form is invalid, show errors
-            this.error = response.body.error;
+            self.error = response.body.error;
           } else {
             // success
             console.log(response);
-            this.formSubmitted = true;
+            self.formSubmitted = true;
           }
         }, (response) => {
           // error
-          this.error = {
+          self.error = {
             message: Utilities.generalError
           };
           console.error(response);

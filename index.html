@@ -107,6 +107,14 @@
         margin-bottom: 1rem;
         text-align: center;
       }
+
+      .pg-form {
+        display: grid;
+      }
+      
+      .pg-form > * {
+        justify-self: center;
+      }
     </style>
     <% for (var chunk of webpack.chunks) {
         for (var file of chunk.files) {

@@ -48,13 +48,16 @@ User.findByUsername = function (username) {
 };
 
 User.startPassphraseReset = function (email) {
-  var tokenExpireDate;
-  var Date = require('../../shared/date');
+  var formattedDate;
+  var knex = require('../utilities').getDB();
+  var tokenExpireDate = new Date();
+  var dateUtilities = require('../../shared/date');
   var utilities = require('../utilities');
   var currentDate = new Date();
   var dateDiff = currentDate.getTime() + (14 * 24 * 60 * 60 * 1000); // two weeks from now
+  
   tokenExpireDate.setTime(dateDiff);
-  var formattedDate = date.sqlDate(tokenExpireDate);
+  formattedDate = dateUtilities.sqlDate(tokenExpireDate);
 
   return knex('users')
     .where({ email: email })
@@ -65,6 +68,8 @@ User.startPassphraseReset = function (email) {
 };
 
 User.continuePassphraseReset = function (token) {
+  var knex = require('../utilities').getDB();
+
   return knex('users')
     .where({ token: token });
 };

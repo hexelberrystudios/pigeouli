@@ -1,6 +1,7 @@
 <template>
   <form v-on:submit="login"
-        name="login" 
+        name="login"
+        class="pg-form"
         method="post"
         action="/login"
         aria-describedby="form-error">
@@ -77,13 +78,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-form {
-  display: grid;
-}
-
-form > * {
-  justify-self: center;
-}
-</style>
