@@ -1,7 +1,7 @@
 <template>
   <div>
     <app-header></app-header>
-    <router-link to="/logout">Logout</router-link>
+    <a href="/logout" class="pg-dark-text-shadow">Logout</a>
     <app-footer></app-footer>
   </div>
 </template>

@@ -1,11 +1,11 @@
 <template>
   <article>
     <aside>
-      <img src="/static/img/profile.png" class="post__profile__pic" alt="An image of a pigeon" />
+      <img src="/static/img/profile.png" class="pg-post__profile__pic" alt="An image of a pigeon" />
     </aside>
-    <section class="post__container">
-      <header class="post__username">{{ username }}</header>
-      <p class="post__content">{{ content }}</p>
+    <section class="pg-post__container">
+      <header class="pg-post__username pg-dark-text-shadow">{{ username }}</header>
+      <p class="pg-post__content pg-dark-text-shadow">{{ content }}</p>
     </section>
   </article>
 </template>
@@ -40,13 +40,13 @@ export default {
     overflow: hidden;
   }
 
-  .post__profile__pic {
+  .pg-post__profile__pic {
     width: 100%;
     background-color: #f6f4f5;
     border-radius: 0.25rem;
   }
 
-  .post__container {
+  .pg-post__container {
     display: inline-block;
     background-color: #ff9a9e;
     padding-left: 0.5rem;
@@ -54,7 +54,7 @@ export default {
     border-width: 0.1rem;
   }
 
-  .post__username {
+  .pg-post__username {
     padding-top: 1rem;
   }
 </style>

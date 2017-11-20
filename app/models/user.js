@@ -2,8 +2,8 @@ var User = {};
 
 User.add = function (username, email, passphrase) {
   var knex = require('../utilities').getDB();
-  var Date = require('../../shared/date');
-  var now = date.sqlNow();
+  var dateUtilities = require('../../shared/date');
+  var now = dateUtilities.sqlNow();
 
   return knex('users').insert({
     username: username,

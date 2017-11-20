@@ -21,6 +21,9 @@
        class="pg-input-error pg-white-text-shadow"
        role="alert"></p>
     <submit-button text="Login"></submit-button>
+    <div class="pg-mt-1">
+      <router-link to="/forgot" class="pg-dark-text-shadow">Forgot your password?</router-link>
+    </div>
   </form>
 </template>
 
@@ -78,3 +81,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  .pg-mt-1 {
+    margin-top: 1rem;
+  }
+</style>
