@@ -67,13 +67,6 @@ User.startPassphraseReset = function (email) {
     });
 };
 
-User.continuePassphraseReset = function (token) {
-  var knex = require('../utilities').getDB();
-
-  return knex('users')
-    .where({ token: token });
-};
-
 User.completePassphraseReset = function (token, passphrase) {
   var knex = require('../utilities').getDB();
 

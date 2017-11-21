@@ -10,11 +10,17 @@
         action="/reset"
         aria-describedby="form-error">
       <p class="pg-dark-text-shadow">Fill out this form to complete a password reset.</p>
-      <text-field id="email"
-                  label="email"
-                  type="email"
-                  placeholder="email"
-                  :error="error.email"></text-field>
+      <text-field id="passphrase"
+                  label="new passphrase"
+                  type="text"
+                  placeholder="new passphrase"
+                  :error="error.passphrase"></text-field>
+      <p id="form-error"
+        v-if="error.message"
+        v-html="error.message"
+        class="pg-input-error pg-white-text-shadow"
+        role="alert"></p>
+      <p v-if="formSubmitted && !error.message" class="pg-txt-center pg-dark-text-shadow">Your passphrase has been reset! You may <router-link to="/login">login</router-link> now.</p>
       <submit-button text="Reset"></submit-button>
     </form>
   </article>
@@ -42,8 +48,8 @@
         e.preventDefault();
 
         this.$http.post('/reset', {
-          email: fields.email,
-          token: Utilities.getQueryParam('token')
+          passphrase: fields.passphrase,
+          token: decodeURIComponent(self.$route.params.token)
         }).then((response) => {
           if (response.body.error) {
             // form is invalid, show errors

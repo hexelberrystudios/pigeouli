@@ -15,9 +15,14 @@
                   type="email"
                   placeholder="email"
                   :error="error.email"></text-field>
+      <p id="form-error"
+        v-if="error.message"
+        v-html="error.message"
+        class="pg-input-error pg-white-text-shadow"
+        role="alert"></p>
       <submit-button text="Reset"></submit-button>
     </form>
-    <p v-if="formSubmitted">Please contact <a :href="mailtoInfo">support@pigeouli.com</a> to request a link for setting your new password. Please make sure to include your email in the request.</p>
+    <p v-if="formSubmitted" class="pg-txt-center pg-dark-text-shadow">Please contact <a :href="mailtoInfo">support@pigeouli.com</a> to request a link for setting your new password. Please make sure to include your email in the request.</p>
   </article>
 </template>
 

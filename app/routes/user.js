@@ -71,27 +71,17 @@ module.exports = function (router, isLoggedIn, utilities) {
     console.log(req.body.email);
 
     User.startPassphraseReset(req.body.email).then(function () {
-      return res.status(200);
-    }).catch(function (err) {
-      return next(err);
-    });
-  });
-
-  router.get('/reset/:token', function (req, res, next) {
-    var user = require('../api/user');
-
-    user.continuePassphraseReset(req.params.token).then(function () {
-      return res.status(200);
+      return res.status(200).send();
     }).catch(function (err) {
       return next(err);
     });
   });
 
   router.post('/reset', function (req, res, next) {
-    var user = require('../api/user');
+    var user = require('../models/user');
     
     user.completePassphraseReset(req.body.token, req.body.passphrase).then(function () {
-      return res.status(200);
+      return res.status(200).send();
     }).catch(function (err) {
       return next(err);
     });
