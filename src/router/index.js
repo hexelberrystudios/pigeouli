@@ -10,6 +10,8 @@ import SettingsPage from '@/components/pages/SettingsPage';
 import NamePage from '@/components/pages/NamePage';
 import ForgotPassphrasePage from '@/components/pages/ForgotPassphrasePage';
 import ResetPassphrasePage from '@/components/pages/ResetPassphrasePage';
+import TermsOfServicePage from '@/components/pages/TermsOfServicePage';
+import PrivacyPolicyPage from '@/components/pages/PrivacyPolicyPage';
 
 Vue.use(Router);
 
@@ -64,6 +66,16 @@ export default new Router({
       path: '/reset/:token',
       name: 'reset-passphrase-page',
       component: ResetPassphrasePage
+    },
+    {
+      path: '/terms-of-service',
+      name: 'terms-of-service-page',
+      component: TermsOfServicePage
+    },
+    {
+      path: '/privacy-policy',
+      name: 'privacy-policy-page',
+      component: PrivacyPolicyPage
     }
   ],
 });
