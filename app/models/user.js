@@ -23,9 +23,6 @@ User.generateHash = function (passphrase) {
 User.isPassphraseValid = function (userPassphrase, givenPassphrase) {
   var bcrypt = require('bcrypt-nodejs');
 
-  console.log('isPassphraseValid');
-  console.log(userPassphrase);
-  console.log(givenPassphrase);
   return bcrypt.compareSync(givenPassphrase, userPassphrase);
 };
 
@@ -55,6 +52,7 @@ User.startPassphraseReset = function (email) {
   var utilities = require('../utilities');
   var currentDate = new Date();
   var dateDiff = currentDate.getTime() + (14 * 24 * 60 * 60 * 1000); // two weeks from now
+  var now = dateUtilities.sqlNow();
   
   tokenExpireDate.setTime(dateDiff);
   formattedDate = dateUtilities.sqlDate(tokenExpireDate);
@@ -63,19 +61,23 @@ User.startPassphraseReset = function (email) {
     .where({ email: email })
     .update({
       token: utilities.generateToken(),
-      token_expire_date: formattedDate
+      token_expire_date: formattedDate,
+      updated_at: now
     });
 };
 
 User.completePassphraseReset = function (token, passphrase) {
   var knex = require('../utilities').getDB();
+  var dateUtilities = require('../../shared/date');
+  var now = dateUtilities.sqlNow();
 
   return knex('users')
     .where({ token: token })
     .update({
       passphrase: User.generateHash(passphrase),
       token: null,
-      token_expire_date: null
+      token_expire_date: null,
+      updated_at: now
     });
 };
 

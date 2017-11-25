@@ -50,7 +50,6 @@
     methods: {
       forget(e) {
         const fields = this.$store.state.form.fields;
-        const self = this;
         e.preventDefault();
 
         this.$http.post('/forgot', {
@@ -58,15 +57,15 @@
         }).then((response) => {
           if (response.body.error) {
             // form is invalid, show errors
-            self.error = response.body.error;
+            this.error = response.body.error;
           } else {
             // success
             console.log(response);
-            self.formSubmitted = true;
+            this.formSubmitted = true;
           }
         }, (response) => {
           // error
-          self.error = {
+          this.error = {
             message: Utilities.generalError
           };
           console.error(response);

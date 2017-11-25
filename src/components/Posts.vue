@@ -8,21 +8,26 @@
 
 <script>
 import Post from './Post';
+import Utilities from '../utilities';
 
 export default {
   name: 'posts',
+  mounted() {
+    this.$http.get('/posts').then((response) => {
+      console.log(response.body);
+      this.posts = response.body;
+    }, (response) => {
+      // error
+      this.error = {
+        message: Utilities.generalError
+      };
+      console.error(response);
+      window.scrollTo(0, 0);
+    });
+  },
   data() {
     return {
-      posts: [{
-        username: 'Jumbalayah',
-        content: 'Coo coo!!!! Cooo coooccoocoocoo cooo cooco! Coo coo!!!! Cooo coooccoocoocoo cooo cooco! Coo coo!!!! Cooo coooccoocoocoo cooo cooco! Coo coo!!!! Cooo coooccoocoocoo cooo cooco!'
-      }, {
-        username: 'Crawfish22',
-        content: 'coo coooo co coo...'
-      }, {
-        username: 'Tekal',
-        content: 'coooo!!!! coo coo  cooooooo!!!!!??'
-      }]
+      posts: {}
     };
   },
   components: {

@@ -50,11 +50,12 @@ module.exports = function (router, isLoggedIn, utilities) {
       })(req, res, next);
     });
 
+  // must be authenticated to logout  
   router.get('/logout', function (req, res) {
     req.logout();
     req.session.destroy();
     return res.redirect('/');
-  });
+  }, isLoggedIn);
 
   router.get('/new-username', function (req, res, next) {
     var user = require('../api/user');

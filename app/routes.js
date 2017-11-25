@@ -1,6 +1,7 @@
 var express = require('express');
 var utilities = require('./utilities');
 var user = require('./routes/user'); // manages all user-related routes, such as login and settings
+var post = require('./routes/post');
 var router = express.Router();
 
 // authenticate check
@@ -19,5 +20,8 @@ router.get('/', function (req, res) {
 
 // user related routes
 user(router, isLoggedIn, utilities);
+
+// post related routes
+post(router, isLoggedIn, utilities);
 
 module.exports = router;

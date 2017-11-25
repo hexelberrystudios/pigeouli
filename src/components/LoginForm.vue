@@ -46,7 +46,6 @@ export default {
     login(e) {
       let user;
       const fields = this.$store.state.form.fields;
-      const self = this;
       e.preventDefault();
 
       this.$http.post('/login', {
@@ -62,7 +61,7 @@ export default {
           user = response.data.user;
 
           if (user) {
-            self.$router.push('/dashboard');
+            this.$router.push('/dashboard');
           }
         }
       }, (response) => {

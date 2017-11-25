@@ -75,11 +75,8 @@ export default {
   },
   methods: {
     addPost(e) {
-      const self = this;
-      // let username = self.$store.state.form.fields.username;
       e.preventDefault();
-
-      self.$router.push('/dashboard');
+      this.$router.push('/dashboard');
     }
   },
   props: {
