@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Utilities from '../../utilities';
+import { generalError } from '../../utilities';
 
 export default {
   name: 'name-page',
@@ -44,7 +44,7 @@ export default {
       this.$http.get('/new-username').then((response) => {
         this.username = response.body;
       }, (response) => {
-        this.error = Utilities.generalError;
+        this.error = generalError;
         console.error(response);
       });
     }

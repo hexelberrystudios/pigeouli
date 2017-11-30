@@ -29,7 +29,7 @@
 <script>
   import TextField from '../TextField';
   import SubmitButton from '../SubmitButton';
-  import Utilities from '../../utilities';
+  import { generalError } from '../../utilities';
 
   export default {
     name: 'forgot-passphrase-page',
@@ -60,13 +60,12 @@
             this.error = response.body.error;
           } else {
             // success
-            console.log(response);
             this.formSubmitted = true;
           }
         }, (response) => {
           // error
           this.error = {
-            message: Utilities.generalError
+            message: generalError
           };
           console.error(response);
           window.scrollTo(0, 0);

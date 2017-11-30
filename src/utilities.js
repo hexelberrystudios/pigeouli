@@ -1,21 +1,24 @@
-export default {
-  generalError: 'The carrier pigeons that run our servers ran into an issue. Please try again later, or contact <a href="mailto:support@pigeouli.com">support@pigeouli.com</a>.',
-  getQueryParam(query) {
-    let result;
+export const generalError = 'The carrier pigeons that run our servers ran into an issue. Please try again later, or contact <a href="mailto:support@pigeouli.com">support@pigeouli.com</a>.';
 
-    if (query) {
-      result = (/^[?#]/.test(query) ? query.slice(1) : query)
-      .split('&')
-      .reduce((params, param) => {
-        const [key, value] = param.split('=');
-        params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
+export const getRandomInt = function getRandomInt(min, max) {
+  return Math.floor(Math.random() * ((max - min) + 1)) + min;
+};
 
-        return params;
-      }, { });
-    } else {
-      result = {};
-    }
+export const getQueryParam = function getQueryParam(query) {
+  let result;
 
-    return result;
+  if (query) {
+    result = (/^[?#]/.test(query) ? query.slice(1) : query)
+    .split('&')
+    .reduce((params, param) => {
+      const [key, value] = param.split('=');
+      params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
+
+      return params;
+    }, { });
+  } else {
+    result = {};
   }
+
+  return result;
 };

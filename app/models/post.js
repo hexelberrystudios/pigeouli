@@ -21,7 +21,7 @@ Post.add = function (content, userId) {
     user_id: userId,
     created_at: now,
     updated_at: now
-  })
+  });
 };
 
 module.exports = Post;

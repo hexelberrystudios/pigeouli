@@ -29,7 +29,7 @@
 <script>
   import TextField from '../TextField';
   import SubmitButton from '../SubmitButton';
-  import Utilities from '../../utilities';
+  import { generalError } from '../../utilities';
 
   export default {
     name: 'reset-passphrase-page',
@@ -61,7 +61,7 @@
         }, (response) => {
           // error
           this.error = {
-            message: Utilities.generalError
+            message: generalError
           };
           console.error(response);
           window.scrollTo(0, 0);

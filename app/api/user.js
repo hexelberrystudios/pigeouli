@@ -29,11 +29,11 @@ user.register = function (username, email, passphrase, callback) {
         }
       }
     }).then(function (rows) {
-        // pass, user created
-        resolve({ id: rows[0] });
+      // pass, user created
+      resolve({ id: rows[0] });
     }).catch(function (error) {
       // failed, db error
-      resolve({ exception: error });
+      reject(error);
     });
   });
 };

@@ -9,18 +9,29 @@
               rows="10"
               cols="50"
               v-model="post"></textarea>
-    <!--<span v-class="{ 'pg-chars-over': remainingCharCount < 0 }">{{ remainingCharCount }}</span>-->
+    <span :class="{ 'pg-chars-over': remainingCharCount < 0 }">{{ remainingCharCount }}</span>
+    <p id="form-error"
+       v-if="error.message"
+       v-html="error.message"
+       class="pg-input-error pg-white-text-shadow"
+       role="alert"></p>
     <submit-button text="Post"></submit-button>
   </form>
 </template>
 
 <script>
 import SubmitButton from './SubmitButton';
+import { getRandomInt, generalError } from '../utilities';
 
 export default {
   name: 'new-post-form',
   created() {
     this.$store.dispatch('form/resetForm');
+  },
+  data() {
+    return {
+      error: {}
+    };
   },
   computed: {
     post: {
@@ -30,10 +41,6 @@ export default {
       set(value) {
         const allowableCharacters = ['c', 'o', 'C', 'O', ' ', '!', '?', '.'];
         let post = value;
-
-        function getRandomInt(min, max) {
-          return Math.floor(Math.random() * ((max - min) + 1)) + min;
-        }
 
         // go through the post and make sure only the allowable characters are in the string
         post = Array.prototype.map.call(post, (char) => {
@@ -76,7 +83,24 @@ export default {
   methods: {
     addPost(e) {
       e.preventDefault();
-      this.$router.push('/dashboard');
+
+      this.$http.post('/post', {
+        content: this.post
+      }).then((response) => {
+        if (response.body.error) {
+          // form is invalid, show errors
+          this.error = response.body.error;
+        } else {
+          // success
+          this.$router.push('/dashboard');
+        }
+      }, (response) => {
+        // error
+        this.error = {
+          message: generalError
+        };
+        console.error(response);
+      });
     }
   },
   props: {

@@ -8,7 +8,7 @@
 
 <script>
 import Post from './Post';
-import Utilities from '../utilities';
+import { generalError } from '../utilities';
 
 export default {
   name: 'posts',
@@ -19,7 +19,7 @@ export default {
     }, (response) => {
       // error
       this.error = {
-        message: Utilities.generalError
+        message: generalError
       };
       console.error(response);
       window.scrollTo(0, 0);

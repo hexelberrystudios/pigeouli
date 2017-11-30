@@ -1,6 +1,6 @@
 module.exports = function (router, isLoggedIn, utilities) {
   // must be authenticated to logout
-  router.get('/posts', function (req, res) {
+  router.get('/posts', function (req, res, next) {
     var Post = require('../models/post');
     
     Post.getAll().then(function (posts) {
@@ -10,11 +10,12 @@ module.exports = function (router, isLoggedIn, utilities) {
     });
   }, isLoggedIn);
 
-  router.post('/post', function (req, res) {
-    var Post = require('../models/post');
+  router.post('/post', function (req, res, next) {
+    var post = require('../api/post');
 
-    Post.add(req.body.content, req.body.user_id).then(function () {
-      return res.status(200).send();
+    // req.user.id refers to the currently logged in user's id
+    post.add(req.body.content, req.user.id).then(function (response) {
+      return res.status(200).json(response);
     }).catch(function (err) {
       return next(err);
     });
