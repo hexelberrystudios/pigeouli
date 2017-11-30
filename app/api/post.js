@@ -9,10 +9,16 @@ post.add = function (content, userId) {
   return new Promise(function (resolve, reject) {
     var error,
       errorMessage;
+    var validCharacters = new RegExp(/[coCO \!\?\.]+/g);
+
     // validation
     if (content.length > 140) {
       resolve({ error: {
         message: 'Goodness, you have a lot to say! Let\'s take that one thought at a time. (140 characters)'
+      }});
+    } else if (!validCharacters.test(content)) {
+      resolve({ error: {
+        message: 'Please stick to cooing until we provide proper internationalization. We apologize for the inconvenience to our international bretheren.'
       }});
     } else {
       Post.add(content, userId).then(function (rows) {
