@@ -57,6 +57,17 @@ module.exports = function (router, isLoggedIn, utilities) {
     return res.redirect('/');
   }, isLoggedIn);
 
+  router.get('/user', function (req, res) {
+    console.log(req.user);
+    if (req.user) {
+      return res.status(200).json(req.user);
+    } else {
+      return res.status(500).json({ error: {
+        message: 'User not found'
+      }});
+    }
+  }, isLoggedIn);
+
   router.get('/new-username', function (req, res, next) {
     var user = require('../api/user');
 
