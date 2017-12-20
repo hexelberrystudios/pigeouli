@@ -23,6 +23,7 @@
     color: var(--white-color);
     width: 100%;
     padding: 0.25rem 0;
+    z-index: 999;
   }
 
   .pg-footer-list {
