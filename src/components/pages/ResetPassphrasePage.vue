@@ -12,7 +12,7 @@
       <p class="pg-dark-text-shadow">Fill out this form to complete a password reset.</p>
       <text-field id="passphrase"
                   label="new passphrase"
-                  type="text"
+                  type="password"
                   placeholder="new passphrase"
                   :error="error.passphrase"></text-field>
       <p id="form-error"
@@ -38,7 +38,8 @@
     },
     data() {
       return {
-        error: {}
+        error: {},
+        formSubmitted: false
       };
     },
     methods: {
@@ -48,7 +49,7 @@
 
         this.$http.post('/reset', {
           passphrase: fields.passphrase,
-          token: decodeURIComponent(self.$route.params.token)
+          token: decodeURIComponent(this.$route.params.token)
         }).then((response) => {
           if (response.body.error) {
             // form is invalid, show errors
