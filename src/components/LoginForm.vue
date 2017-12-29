@@ -8,12 +8,10 @@
     <text-field id="email"
                 label="email"
                 type="email"
-                placeholder="email"
                 :error="error.email"></text-field>
     <text-field id="passphrase"
                 label="passphrase"
                 type="password"
-                placeholder="passphrase"
                 :error="error.passphrase"></text-field>
     <p id="form-error"
        v-if="error.message"

@@ -33,6 +33,7 @@
         --gray-color-shadow: rgba(191, 168, 185, 0.25);
         /* shadows */
         --dark-text-shadow: 0.05em 0.05em 0.05em var(--dark-color);
+        --input-border-color: #c57070;
       }
 
       body {
@@ -63,6 +64,19 @@
 
       p {
         line-height: 1.42857143;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
+        font-size: 1.25em;
+        margin: 0.5em 0;
+        background-color: var(--white-color);
+        color: #000;
+        border-radius: 0;
+        border: 0.1rem solid var(--input-border-color);
+        box-shadow: 0.1rem 0.1rem 0.125rem var(--gray-color) inset;
+        padding: 0.35rem;
       }
 
       .pg-white-text-shadow {

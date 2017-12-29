@@ -1,31 +1,12 @@
 <template>
   <form v-on:submit="addPost" name="post" method="post" action="/post">
     <!--<username class-names="pg-np-username"></username>-->
-    <fieldset class="pg-emotion-selector">
-      <legend class="pg-dark-text-shadow">Which face are you making writing this?</legend>
-      <div class="pg-emotion-select">
-        <input id="neutral" type="radio" name="emotion" value="neutral" class="pg-emotion-select pg-sr-only">
-        <label for="neutral">
-          <img src="/static/img/pigeon_profile_neutral.svg" alt="An image of a pigeon with a neutral expression" class="pg-np-pigeon pg-emotion-option">
-        </label>
-      </div>
-      <div class="pg-emotion-select">
-        <input id="irritated" type="radio" name="emotion" value="irritated" class="pg-emotion-select pg-sr-only">
-        <label for="irritated">
-          <img src="/static/img/pigeon_profile_neutral.svg" alt="An image of a pigeon with a neutral expression" class="pg-np-pigeon pg-emotion-option">
-        </label>
-      </div>
-      <div class="pg-emotion-select">
-        <input id="intrigued" type="radio" name="emotion" value="intrigued" class="pg-emotion-select pg-sr-only">
-        <label for="intrigued">
-          <img src="/static/img/pigeon_profile_neutral.svg" alt="An image of a pigeon with a neutral expression" class="pg-np-pigeon pg-emotion-option">
-        </label>
-      </div>
-    </fieldset>
-    <label for="new-post" class="pg-sr-only">Post Content</label>
+    <emotion-select></emotion-select>
+    <label for="new-post" class="pg-sr-only">What do you need to say?</label>
     <textarea id="new-post"
               rows="10"
               cols="50"
+              class="pg-post-field"
               v-model="post"></textarea>
     <span :class="{ 'pg-chars-over': remainingCharCount < 0, 'pg-dark-text-shadow': true, 'pg-chars': true }">{{ remainingCharCount }}</span>
     <p id="form-error"
@@ -40,6 +21,7 @@
 <script>
 import SubmitButton from './SubmitButton';
 import Username from './Username';
+import EmotionSelect from './EmotionSelect';
 import { getRandomInt, generalError } from '../utilities';
 
 export default {
@@ -130,21 +112,18 @@ export default {
   },
   components: {
     SubmitButton,
-    Username
+    Username,
+    EmotionSelect
   }
 };
 </script>
 
-<style scoped>
-  .pg-np-pigeon {
-    width: 5rem;
-  }
-
+<style>
   .pg-np-username {
     padding: 1rem;
   }
 
-  textarea {
+  .pg-post-field {
     width: 98%;
     display: block;
     padding: 1%;
@@ -162,30 +141,6 @@ export default {
 
   .pg-chars-over {
     color: red;
-  }
-
-  .pg-emotion-option {
-    border: 0.1rem solid var(--med-color);
-    border-radius: 1rem;
-    background-color: var(--dark-color);
-    padding-top: 0.5rem;
-    transition: all 0.125s;
-    cursor: pointer;
-  }
-  
-  .pg-emotion-select:checked + label > img {
-    background-color: var(--white-color);
-  }
-
-  .pg-emotion-selector {
-    margin-top: 1rem;
-    border-color: var(--med-color);
-    border-radius: 0.3rem;
-  }
-
-  .pg-emotion-select {
-    display: inline-block;
-    margin: 0 0.5rem;
   }
 
   .pg-chars {
