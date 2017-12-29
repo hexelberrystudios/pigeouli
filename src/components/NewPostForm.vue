@@ -1,7 +1,7 @@
 <template>
   <form v-on:submit="addPost" name="post" method="post" action="/post">
     <div>
-      <img src="/static/img/profile.png" alt="An image of a pigeon" class="pg-np-pigeon" />
+      <img src="/static/img/pigeon_profile_neutral.svg" alt="An image of a pigeon" class="pg-np-pigeon" />
       <username class-names="pg-np-username"></username>
     </div>
     <label for="new-post" class="pg-sr-only">Post Content</label>
