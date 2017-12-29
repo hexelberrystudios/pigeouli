@@ -2,10 +2,10 @@
   <article>
     <!-- @TODO: use aria-label for the displayed emotion -->
     <aside class="pg-profile-pic">
-      <img src="/static/img/profile.png" alt="An image of a pigeon" class="pg-np-pigeon" />
+      <img src="/static/img/pigeon_profile_neutral.svg" alt="An image of a pigeon" class="pg-np-pigeon" />
     </aside>
     <section class="pg-post__container">
-      <header class="pg-post__username pg-dark-text-shadow">{{ username }}</header>
+      <header class="pg-post__username pg-white-text-shadow">{{ username }}:</header>
       <p class="pg-post__content pg-dark-text-shadow">{{ content }}</p>
     </section>
   </article>
@@ -44,6 +44,7 @@ export default {
   }
 
   .pg-profile-pic {
+    display: flex;
     position: relative;
     width: 100%;
     background-color: var(--dark-color);
@@ -51,12 +52,6 @@ export default {
     border-width: 0.1rem;
     overflow: hidden;
     z-index: 999;
-  }
-
-  .pg-post__profile__pic {
-    width: 100%;
-    background-color: #f6f4f5;
-    border-radius: 0.25rem;
   }
 
   .pg-post__container {
@@ -68,6 +63,14 @@ export default {
   }
 
   .pg-post__username {
-    padding-top: 1rem;
+    color: var(--dark-color);
+    font-weight: bold;
+    padding-top: 0.5rem;
+  }
+
+  .pg-np-pigeon {
+    width: 100%;
+    align-self: flex-end;
+    padding-top: 0.5rem;
   }
 </style>
