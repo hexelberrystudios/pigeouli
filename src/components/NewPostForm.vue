@@ -2,7 +2,7 @@
   <form v-on:submit="addPost" name="post" method="post" action="/post">
     <div>
       <img src="/static/img/profile.png" alt="An image of a pigeon" class="pg-np-pigeon" />
-      <username classNames="pg-np-username"></username>
+      <username class-names="pg-np-username"></username>
     </div>
     <label for="new-post" class="pg-sr-only">Post Content</label>
     <textarea id="new-post"

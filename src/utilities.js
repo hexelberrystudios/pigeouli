@@ -22,3 +22,12 @@ export const getQueryParam = function getQueryParam(query) {
 
   return result;
 };
+
+export const clearLoginInfo = function clearLoginInfo() {
+  try {
+    // refresh user info
+    localStorage.removeItem('pg_user');
+  } catch (e) {
+    console.error('local storage not supported');
+  }
+};

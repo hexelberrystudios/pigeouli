@@ -1,20 +1,16 @@
 import Vue from 'vue';
 
 const userModule = {
-  // namespace this module so that it doesn't collide with other store behavior
-  namespaced: true, // -> getters['user/*']
+  namespaced: true,
   // default values
-  state: {},
-  getters: {
-    get: state => state.user
-  },
+  state: { user: {} },
   // directly update the store
   mutations: {
     UPDATE_USER: (state, user) => {
-      state.user = user;
+      Vue.set(state, 'user', user);
     },
     CLEAR_USER: (state) => {
-      state.user = null;
+      Vue.set(state, 'user', null);
     }
   },
   // update the store event handler
@@ -29,7 +25,7 @@ const userModule = {
           console.error(errMsg);
           promiseReject(errMsg);
         };
-
+        console.log('getUser');
         if (cachedUser) {
           commit('UPDATE_USER', JSON.parse(cachedUser));
           resolve(cachedUser);
@@ -41,7 +37,7 @@ const userModule = {
                 // cache the response
                 localStorage.setItem(userVar, JSON.stringify(response.body));
                 commit('UPDATE_USER', response.body);
-                resolve(response.body.user);
+                resolve(response.body);
               } else {
                 failHandler(userVar, errorMsg, reject);
               }

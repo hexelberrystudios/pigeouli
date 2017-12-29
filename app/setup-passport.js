@@ -57,9 +57,9 @@ passport.use('local-login', new LocalStrategy({
 
   User.findByEmail(email).then(function (rows) {
     if (rows.length !== 1) {
-      done(null, false, { message: 'User not found.' });
+      done(null, false, { error: { email: 'User not found.' } });
     } else if (!User.isPassphraseValid(rows[0].passphrase, passphrase)) {
-      done(null, false, { passphrase: 'Invalid passphrase.' });
+      done(null, false, { error: { passphrase: 'Invalid passphrase.' } });
     } else {
       done(null, rows[0]);
     }

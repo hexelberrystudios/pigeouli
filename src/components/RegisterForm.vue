@@ -30,7 +30,7 @@
 <script>
 import TextField from './TextField';
 import SubmitButton from './SubmitButton';
-import { generalError } from '../utilities';
+import { generalError, clearLoginInfo } from '../utilities';
 
 export default {
   name: 'register-form',
@@ -73,6 +73,7 @@ export default {
         } else {
           // success
           console.log(response.body);
+          clearLoginInfo();
           this.$router.push('/dashboard');
         }
       }, (response) => {

@@ -32,7 +32,6 @@
     name: 'text-field',
     methods: {
       update(e) {
-        console.log(e.target.value);
         // tell action in form vuex module to update its form field with the following key/value pair
         this.$store.dispatch('form/updateField', {
           name: this.id,

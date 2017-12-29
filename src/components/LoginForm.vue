@@ -30,7 +30,7 @@
 <script>
 import TextField from './TextField';
 import SubmitButton from './SubmitButton';
-import { generalError } from '../utilities';
+import { generalError, clearLoginInfo } from '../utilities';
 
 export default {
   name: 'login-form',
@@ -61,6 +61,7 @@ export default {
           user = response.data.user;
 
           if (user) {
+            clearLoginInfo();
             this.$router.push('/dashboard');
           }
         }
