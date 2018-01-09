@@ -15,7 +15,7 @@ export default {
   name: 'emotion-select',
   data() {
     return {
-      emotions: ['neutral', 'happy', 'sad', 'irritated', 'intrigued', 'tired']
+      emotions: ['neutral', 'happy', 'sad', 'angry', 'confused', 'tired']
     };
   },
   components: {

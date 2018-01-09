@@ -12,7 +12,7 @@ export default {
   name: 'emotion-option',
   data() {
     return {
-      imgUrl: '/static/img/pigeon_profile_neutral.svg',
+      imgUrl: `/static/img/pigeon_profile_${this.emotion}.svg`,
       altText: `An image of a pigeon with a ${this.emotion} expression`
     };
   },
