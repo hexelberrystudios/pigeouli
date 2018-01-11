@@ -17,6 +17,7 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('posts', function (table) {
       table.increments();
       table.text('content').notNullable();
+      table.string('emotion', 60).notNullable();
       // user id
       table.boolean('active').notNullable().defaultTo(true);
       table.timestamps();

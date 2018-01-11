@@ -2,7 +2,7 @@
   <article>
     <!-- @TODO: use aria-label for the displayed emotion -->
     <aside class="pg-profile-pic">
-      <img src="/static/img/pigeon_profile_neutral.svg" alt="An image of a pigeon" class="pg-np-pigeon" />
+      <img :src="emotionUrl" alt="An image of a pigeon" class="pg-np-pigeon" />
     </aside>
     <section class="pg-post__container">
       <header class="pg-post__username pg-white-text-shadow">{{ username }}:</header>
@@ -14,12 +14,21 @@
 <script>
 export default {
   name: 'post',
+  data() {
+    return {
+      emotionUrl: `/static/img/pigeon_profile_${this.emotion}.svg`
+    };
+  },
   props: {
     username: {
       Type: String,
       required: true
     },
     content: {
+      Type: String,
+      required: true
+    },
+    emotion: {
       Type: String,
       required: true
     }

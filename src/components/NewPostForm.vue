@@ -86,7 +86,8 @@ export default {
       e.preventDefault();
 
       this.$http.post('/post', {
-        content: this.post
+        content: this.post,
+        emotion: this.$store.state.form.fields.emotion
       }).then((response) => {
         if (response.body.error) {
           // form is invalid, show errors

@@ -1,7 +1,7 @@
 var User = {};
 
 User.add = function (username, email, passphrase) {
-  var knex = require('../utilities').getDB();
+  var knex = require('../db').get();
   var dateUtilities = require('../../shared/date');
   var now = dateUtilities.sqlNow();
 
@@ -27,7 +27,7 @@ User.isPassphraseValid = function (userPassphrase, givenPassphrase) {
 };
 
 User.find = function (options) {
-  var knex = require('../utilities').getDB();
+  var knex = require('../db').get();
   
   return knex('users').select('id', 'username', 'email', 'passphrase').where(options);
 };
@@ -46,7 +46,7 @@ User.findByUsername = function (username) {
 
 User.startPassphraseReset = function (email) {
   var formattedDate;
-  var knex = require('../utilities').getDB();
+  var knex = require('../db').get();
   var tokenExpireDate = new Date();
   var dateUtilities = require('../../shared/date');
   var utilities = require('../utilities');
@@ -67,7 +67,7 @@ User.startPassphraseReset = function (email) {
 };
 
 User.completePassphraseReset = function (token, passphrase) {
-  var knex = require('../utilities').getDB();
+  var knex = require('../db').get();
   var dateUtilities = require('../../shared/date');
   var now = dateUtilities.sqlNow();
 

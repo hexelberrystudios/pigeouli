@@ -1,6 +1,11 @@
 <template>
   <div class="pg-emotion-select">
-    <input :id="emotion" type="radio" name="emotion" :value="emotion" class="pg-emotion-select pg-sr-only">
+    <input :id="emotion"
+           type="radio"
+           name="emotion"
+           :value="emotion"
+           class="pg-emotion-select pg-sr-only"
+           @change="update">
     <label :for="emotion">
       <img :src="imgUrl" :alt="altText" class="pg-emotion-option">
     </label>
@@ -10,6 +15,15 @@
 <script>
 export default {
   name: 'emotion-option',
+  methods: {
+    update(e) {
+      // tell action in form vuex module to update its form field with the following key/value pair
+      this.$store.dispatch('form/updateField', {
+        name: 'emotion',
+        value: e.target.value
+      });
+    }
+  },
   data() {
     return {
       imgUrl: `/static/img/pigeon_profile_${this.emotion}.svg`,
