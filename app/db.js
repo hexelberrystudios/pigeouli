@@ -14,9 +14,9 @@ var init = function () {
 db.get = function () {
   if (!dbInstance) {
     dbInstance = init();
-  } else {
-    return dbInstance;
   }
+
+  return dbInstance;
 }
 
 module.exports = db;

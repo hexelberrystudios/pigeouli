@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <article class="pg-post">
     <!-- @TODO: use aria-label for the displayed emotion -->
     <aside class="pg-profile-pic">
       <img :src="emotionUrl" alt="An image of a pigeon" class="pg-np-pigeon" />
@@ -39,14 +39,14 @@ export default {
 <style>
   /* desktop */
   @media all and (min-width: 501px) {
-    article {
+    .pg-post {
       display: grid;
       grid-template-columns: 1fr 9fr;
     }
   }
   /* mobile */
   @media all and (max-width: 500px) {
-    article {
+    .pg-post {
       display: grid;
       grid-template-columns: 2fr 8fr;
     }
