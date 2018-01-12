@@ -15,6 +15,7 @@
                   type="password"
                   placeholder="new passphrase"
                   :error="error.passphrase"></text-field>
+      <p class="pg-dark-text-shadow">(The passphrase is ideally a few random words, but can be anything as long as it's at least three characters.)</p>
       <p id="form-error"
         v-if="error.message"
         v-html="error.message"

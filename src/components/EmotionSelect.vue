@@ -27,6 +27,8 @@ export default {
 <style>
   .pg-emotion-selector {
     margin-top: 1rem;
+    margin-left: 0;
+    margin-right: 0;
     border-color: var(--med-color);
     border-radius: 0.3rem;
   }

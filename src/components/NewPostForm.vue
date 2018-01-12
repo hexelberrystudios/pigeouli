@@ -1,6 +1,5 @@
 <template>
-  <form v-on:submit="addPost" name="post" method="post" action="/post">
-    <!--<username class-names="pg-np-username"></username>-->
+  <form v-on:submit="addPost" name="post" method="post" action="/post" class="pg-new-post-form">
     <emotion-select></emotion-select>
     <label for="new-post" class="pg-sr-only">What do you need to say?</label>
     <textarea id="new-post"
@@ -45,9 +44,16 @@ export default {
 
         // go through the post and make sure only the allowable characters are in the string
         post = Array.prototype.map.call(post, (char) => {
-          // automatically replace any offending characters with either a 'c' or 'o'
-          const randomCharacter = getRandomInt(0, 1);
+          let randomCharacter;
           let result;
+
+          // automatically replace any offending characters with either a 'c' or 'o'
+          // (or 'C'/'O' if the letter is capitalized)
+          if (char === char.toLowerCase()) {
+            randomCharacter = getRandomInt(0, 1);
+          } else {
+            randomCharacter = getRandomInt(2, 3);
+          }
 
           if (allowableCharacters.indexOf(char) > -1) {
             // accepted character
@@ -146,5 +152,20 @@ export default {
 
   .pg-chars {
     padding-left: 0.25rem;
+  }
+
+  /* desktop */
+  @media all and (min-width: 501px) {
+    .pg-new-post-form {
+      padding: 2rem;
+    }
+
+    .pg-emotion-selector {
+      margin-bottom: 1rem;
+    }
+
+    .pg-post-field {
+      border: 0.1rem solid var(--med-color);
+    }
   }
 </style>
