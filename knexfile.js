@@ -21,9 +21,9 @@ module.exports = {
   staging: {
     client: 'mysql',
     connection: {
-      database: 'pigeouli',
-      user:     'root',
-      password: 'gamera'
+      user: process.env.SQL_USER,
+      password: process.env.SQL_PASSWORD,
+      database: process.env.SQL_DATABASE
     },
     pool: {
       min: 2,
@@ -37,9 +37,9 @@ module.exports = {
   production: {
     client: 'mysql',
     connection: {
-      database: 'pigeouli',
-      user:     'root',
-      password: 'gamera'
+      user: process.env.SQL_USER,
+      password: process.env.SQL_PASSWORD,
+      database: process.env.SQL_DATABASE
     },
     pool: {
       min: 2,
