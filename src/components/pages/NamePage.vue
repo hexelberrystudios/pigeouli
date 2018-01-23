@@ -1,6 +1,6 @@
 <template>
   <article>
-    <img src="/static/img/pigeon-select.png" />
+    <img src="/static/img/pigeon_profile_neutral.svg" />
     <span id="name-prompt" class="pg-dark-text-shadow">Your username is</span>
     <span id="username" class="pg-white-text-shadow">{{ username }}</span>
     <button type="button" @click="reroll" class="pg-button">No, it's...</button>

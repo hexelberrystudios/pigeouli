@@ -65,7 +65,7 @@ export default {
 
   .pg-post__container {
     display: inline-block;
-    background-color: #ff9a9e;
+    background-color: var(--light-color);
     padding-left: 0.5rem;
     border: dashed rgba( 0,0,0,0.2);
     border-width: 0.1rem;
