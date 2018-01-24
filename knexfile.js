@@ -20,11 +20,7 @@ module.exports = {
 
   staging: {
     client: 'mysql',
-    connection: {
-      user: process.env.SQL_USER,
-      password: process.env.SQL_PASSWORD,
-      database: process.env.SQL_DATABASE
-    },
+    connection: process.env.DB_URL,
     pool: {
       min: 2,
       max: 10
@@ -36,11 +32,7 @@ module.exports = {
 
   production: {
     client: 'mysql',
-    connection: {
-      user: process.env.SQL_USER,
-      password: process.env.SQL_PASSWORD,
-      database: process.env.SQL_DATABASE
-    },
+    connection: process.env.DB_URL,
     pool: {
       min: 2,
       max: 10
