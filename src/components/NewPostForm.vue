@@ -1,5 +1,5 @@
 <template>
-  <form v-on:submit="addPost" name="post" method="post" action="/post" class="pg-new-post-form">
+  <form id="new-post-form" v-on:submit="addPost" name="post" method="post" action="/post" class="pg-new-post-form">
     <emotion-select></emotion-select>
     <label for="new-post" class="pg-sr-only">What do you need to say?</label>
     <textarea id="new-post"
@@ -141,7 +141,7 @@ export default {
     border-color: var(--med-color);
   }
 
-  .pg-button {
+  #new-post-form .pg-button {
     float: right;
     margin: 0.5rem;
   }

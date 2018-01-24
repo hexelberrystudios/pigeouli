@@ -22,7 +22,7 @@
         role="alert"></p>
       <submit-button text="Reset"></submit-button>
     </form>
-    <p v-if="formSubmitted" class="pg-txt-center pg-dark-text-shadow">Please contact <a :href="mailtoInfo" class="pg-dark-text-shadow">support@pigeouli.com</a> to request a link for setting your new password. Please make sure to include your email in the request.</p>
+    <p v-if="formSubmitted" class="pg-txt-center pg-dark-text-shadow">Please contact <a :href="mailtoInfo" class="pg-dark-text-shadow">hexelberrystudios@gmail.com</a> to request a link for setting your new password. Please make sure to include your email in the request.</p>
   </article>
 </template>
 
@@ -44,7 +44,7 @@
     },
     computed: {
       mailtoInfo() {
-        return `mailto:support@pigeouli.com?Subject=Reset%20Password%20Request%20for%20${encodeURIComponent(this.$store.state.form.fields.email)}`;
+        return `mailto:hexelberrystudios@gmail.com?Subject=Reset%20Password%20Request%20for%20${encodeURIComponent(this.$store.state.form.fields.email)}`;
       }
     },
     methods: {

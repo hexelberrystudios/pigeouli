@@ -1,4 +1,4 @@
-export const generalError = 'The carrier pigeons that run our servers ran into an issue. Please try again later, or contact <a href="mailto:support@pigeouli.com" class="pg-dark-text-shadow">support@pigeouli.com</a>.';
+export const generalError = 'The carrier pigeons that run our servers ran into an issue. Please try again later, or contact <a href="mailto:hexelberrystudios@gmail.com" class="pg-dark-text-shadow">hexelberrystudios@gmail.com</a>.';
 
 export const getRandomInt = function getRandomInt(min, max) {
   return Math.floor(Math.random() * ((max - min) + 1)) + min;

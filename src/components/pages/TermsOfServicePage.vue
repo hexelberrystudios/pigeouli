@@ -74,7 +74,7 @@
       </li>
       <li>
         Questions about the Terms of Service should be sent to the support team at:
-        <a href="mailto:support@pigeouli.com?Subject=Terms%20Of%20Service%20Question" class="pg-dark-text-shadow">support@pigeouli.com</a>
+        <a href="mailto:hexelberrystudios@gmail.com?Subject=Terms%20Of%20Service%20Question" class="pg-dark-text-shadow">hexelberrystudios@gmail.com</a>
       </li>
     </ol>
     <marketing-footer></marketing-footer>
