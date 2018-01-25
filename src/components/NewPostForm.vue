@@ -13,7 +13,7 @@
        v-html="error.message"
        class="pg-input-error pg-white-text-shadow"
        role="alert"></p>
-    <submit-button text="Post"></submit-button>
+    <submit-button id="submit-btn" text="Post"></submit-button>
   </form>
 </template>
 
@@ -167,5 +167,9 @@ export default {
     .pg-post-field {
       border: 0.1rem solid var(--med-color);
     }
+  }
+
+  #new-post-form #submit-btn {
+    margin-bottom: 3rem;
   }
 </style>
